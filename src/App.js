@@ -1,23 +1,22 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useCallback} from 'react';
 import './App.css';
 
 //import '@tensorflow/tfjs-node';
 //import * as faceapi from 'face-api.js';
 
-//import * as tf from '@tensorflow/tfjs';
+import * as tf from '@tensorflow/tfjs';
+import * as posenet from '@tensorflow-models/posenet';
 //import webgazer from 'webgazer';
 import Webcam from 'react-webcam';
 import logo from './logo.png';
-//import * as canvas from 'canvas';
 
 
 const App = () => {
-  const [camOn] = useState(true);
+  const [camOn, setCamOn] = useState(true);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
-  /**
   //  Load posenet
   const runPosenet = async () => {
     const net = await posenet.load({
@@ -53,8 +52,8 @@ const App = () => {
   };
 
   runPosenet();
-   */
 
+  const toggleCam = useCallback(() => setCamOn(!camOn));
 
   return (
     <div className="App">
@@ -89,7 +88,7 @@ const App = () => {
           height:480,
         }}
         />
-        <button style={{position:"absolute", top:'50px', left:'400px', zIndex:10}}>Toggle Camera</button>
+        <button style={{position:"absolute", top:'50px', left:'400px', zIndex:10}} onClick={toggleCam}>Toggle Camera</button>
       </header>
       <img src={logo} alt="Logo" style={{position:'absolute', left:'2vw', bottom:'2vw'}} />
     </div>
