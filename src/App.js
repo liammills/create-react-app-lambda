@@ -5,7 +5,7 @@ import './App.css';
 //import * as faceapi from 'face-api.js';
 
 //import * as tf from '@tensorflow/tfjs';
-//import * as posenet from '@tensorflow-models/posenet';
+import * as posenet from '@tensorflow-models/posenet';
 //import webgazer from 'webgazer';
 import Webcam from 'react-webcam';
 import logo from './logo.png';
@@ -18,7 +18,7 @@ const App = () => {
   const canvasRef = useRef(null);
 
   //  Load posenet
-  /**const runPosenet = async () => {
+  const runPosenet = async () => {
     const net = await posenet.load({
       inputResolution: { width: 640, height: 480 },
       scale: 0.8,
@@ -51,7 +51,7 @@ const App = () => {
     }
   };
 
-  runPosenet();*/
+  runPosenet();
 
   //const toggleCam = React.useCallback(() => setCamOn(!camOn));
 
@@ -88,7 +88,7 @@ const App = () => {
           height:480,
         }}
         />
-        <button style={{position:"absolute", top:'50px', left:'400px', zIndex:10}}>Toggle Camera</button>
+        {/**<button style={{position:"absolute", top:'50px', left:'400px', zIndex:10}}>Toggle Camera</button>*/}
       </header>
       <img src={logo} alt="Logo" style={{position:'absolute', left:'2vw', bottom:'2vw'}} />
     </div>
