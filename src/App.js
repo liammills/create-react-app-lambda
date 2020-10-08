@@ -12,7 +12,7 @@ import logo from './logo.png';
 
 
 const App = () => {
-  const [camOn, setCamOn] = useState(true);
+  const [camOn] = useState(true);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
@@ -53,7 +53,7 @@ const App = () => {
 
   runPosenet();
 
-  const toggleCam = useCallback(() => setCamOn(!camOn));
+  //const toggleCam = useCallback(() => setCamOn(!camOn));
 
   return (
     <div className="App">
@@ -88,7 +88,7 @@ const App = () => {
           height:480,
         }}
         />
-        <button style={{position:"absolute", top:'50px', left:'400px', zIndex:10}} onClick={toggleCam}>Toggle Camera</button>
+        <button style={{position:"absolute", top:'50px', left:'400px', zIndex:10}}>Toggle Camera</button>
       </header>
       <img src={logo} alt="Logo" style={{position:'absolute', left:'2vw', bottom:'2vw'}} />
     </div>
