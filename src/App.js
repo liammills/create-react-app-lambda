@@ -5,7 +5,7 @@ import './App.css';
 //import * as faceapi from 'face-api.js';
 
 //import * as tf from '@tensorflow/tfjs';
-import * as posenet from '@tensorflow-models/posenet';
+//import * as posenet from '@tensorflow-models/posenet';
 //import webgazer from 'webgazer';
 import Webcam from 'react-webcam';
 import logo from './logo.png';
