@@ -55,7 +55,6 @@ const App = () => {
   runPosenet();
    */
 
-  const toggleCam = React.useCallback(() => setCamOn(!camOn));
 
   return (
     <div className="App">
