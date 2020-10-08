@@ -18,7 +18,7 @@ const App = () => {
   const canvasRef = useRef(null);
 
   //  Load posenet
-  const runPosenet = async () => {
+  /**const runPosenet = async () => {
     const net = await posenet.load({
       inputResolution: { width: 640, height: 480 },
       scale: 0.8,
@@ -51,7 +51,7 @@ const App = () => {
     }
   };
 
-  runPosenet();
+  runPosenet();*/
 
   //const toggleCam = React.useCallback(() => setCamOn(!camOn));
 
