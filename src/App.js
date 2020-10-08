@@ -12,7 +12,7 @@ import logo from './logo.png';
 
 
 const App = () => {
-  const [camOn, setCamOn] = useState(true);
+  const [camOn] = useState(true);
 
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
