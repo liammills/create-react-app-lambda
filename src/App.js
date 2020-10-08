@@ -1,50 +1,100 @@
-import React, { Component } from "react"
-import logo from "./logo.svg"
-import "./App.css"
+import React, {useRef, useState, useCallback} from 'react';
+import './App.css';
 
-class LambdaDemo extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { loading: false, msg: null }
-  }
+//import '@tensorflow/tfjs-node';
+//import * as faceapi from 'face-api.js';
 
-  handleClick = api => e => {
-    e.preventDefault()
+//import * as tf from '@tensorflow/tfjs';
+//import webgazer from 'webgazer';
+import Webcam from 'react-webcam';
+import logo from './logo.png';
+//import * as canvas from 'canvas';
 
-    this.setState({ loading: true })
-    fetch("/.netlify/functions/" + api)
-      .then(response => response.json())
-      .then(json => this.setState({ loading: false, msg: json.msg }))
-  }
 
-  render() {
-    const { loading, msg } = this.state
+const App = () => {
+  const [camOn, setCamOn] = useState(true);
 
-    return (
-      <p>
-        <button onClick={this.handleClick("hello")}>{loading ? "Loading..." : "Call Lambda"}</button>
-        <button onClick={this.handleClick("async-dadjoke")}>{loading ? "Loading..." : "Call Async Lambda"}</button>
-        <br />
-        <span>{msg}</span>
-      </p>
-    )
-  }
+  const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
+
+  /**
+  //  Load posenet
+  const runPosenet = async () => {
+    const net = await posenet.load({
+      inputResolution: { width: 640, height: 480 },
+      scale: 0.8,
+    });
+    //
+    setInterval(() => {
+      detect(net);
+    }, 100);
+  };
+
+  const detect = async (net) => {
+    if (
+      typeof webcamRef.current !== "undefined" &&
+      webcamRef.current !== null &&
+      webcamRef.current.video.readyState === 4
+    ) {
+      // Get Video Properties
+      const video = webcamRef.current.video;
+      const videoWidth = webcamRef.current.video.videoWidth;
+      const videoHeight = webcamRef.current.video.videoHeight;
+
+      // Set video width
+      webcamRef.current.video.width = videoWidth;
+      webcamRef.current.video.height = videoHeight;
+
+      // Make Detections
+      const pose = await net.estimateSinglePose(video);
+      console.log(pose);
+
+    }
+  };
+
+  runPosenet();
+   */
+
+  const toggleCam = React.useCallback(() => setCamOn(!camOn));
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        {camOn ? 
+        <Webcam ref={webcamRef}
+        audio={false}
+        mirrored={true}
+        style={{
+          position:"absolute",
+          marginLeft:"auto",
+          marginRight:"auto",
+          left:0,
+          right:0,
+          textAlign:"center",
+          zIndex:9,
+          width:640,
+          height:480,
+        }}
+        />
+        : <p className="Loading">Camera is not on.</p>}
+        <canvas ref={canvasRef}
+        style={{
+          position:"absolute",
+          marginLeft:"auto",
+          marginRight:"auto",
+          left:0,
+          right:0,
+          textAlign:"center",
+          zIndex:9,
+          width:640,
+          height:480,
+        }}
+        />
+        <button style={{position:"absolute", top:'50px', left:'400px', zIndex:10}} onClick={toggleCam}>Toggle Camera</button>
+      </header>
+      <img src={logo} alt="Logo" style={{position:'absolute', left:'2vw', bottom:'2vw'}} />
+    </div>
+  );
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <LambdaDemo />
-        </header>
-      </div>
-    )
-  }
-}
-
-export default App
+export default App;
