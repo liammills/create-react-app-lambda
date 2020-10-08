@@ -1,4 +1,4 @@
-import React, {useRef, useState, useCallback} from 'react';
+import React, {useRef, useState} from 'react';
 import './App.css';
 
 //import '@tensorflow/tfjs-node';
@@ -53,7 +53,7 @@ const App = () => {
 
   runPosenet();*/
 
-  //const toggleCam = useCallback(() => setCamOn(!camOn));
+  //const toggleCam = React.useCallback(() => setCamOn(!camOn));
 
   return (
     <div className="App">
